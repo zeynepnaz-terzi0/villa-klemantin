@@ -122,8 +122,16 @@ section{position:relative}
 .coords{margin-top:1.8rem;font-family:"Fraunces",serif;font-size:.95rem;font-style:italic;color:var(--leaf);display:flex;align-items:center;gap:.6rem}
 .coords::before{content:"";width:20px;height:1px;background:var(--leaf)}
 .about-figure{position:relative}
-.about-figure img{width:100%;height:clamp(340px,52vh,540px);object-fit:cover;border-radius:3px;box-shadow:var(--shadow)}
-.about-figure .cap{position:absolute;bottom:1rem;left:1rem;background:rgba(244,242,234,.92);color:var(--ink);font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;padding:.5rem .85rem;border-radius:2px;font-weight:600}
+.pf-frame{position:relative;width:100%;height:clamp(340px,52vh,540px);border-radius:3px;overflow:hidden;box-shadow:var(--shadow);background:var(--card)}
+.pf-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s ease}
+.pf-img.active{opacity:1}
+.pf-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:42px;height:42px;border-radius:999px;background:rgba(16,20,12,.5);border:1px solid rgba(255,255,255,.35);color:#fff;font-size:1.5rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:.9;transition:background .2s,transform .2s,opacity .2s}
+.pf-nav:hover{opacity:1;background:rgba(16,20,12,.82);transform:translateY(-50%) scale(1.06)}
+.pf-prev{left:.8rem}.pf-next{right:.8rem}
+.pf-dots{position:absolute;bottom:1rem;right:1rem;z-index:3;display:flex;gap:.4rem}
+.pf-dots button{width:8px;height:8px;padding:0;border:0;border-radius:999px;background:rgba(255,255,255,.55);cursor:pointer;transition:background .2s,transform .2s}
+.pf-dots button.active{background:#fff;transform:scale(1.3)}
+.about-figure .cap{position:absolute;bottom:1rem;left:1rem;z-index:3;background:rgba(244,242,234,.92);color:var(--ink);font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;padding:.5rem .85rem;border-radius:2px;font-weight:600}
 
 /* FEATURES */
 .features{background:var(--card)}
@@ -293,8 +301,18 @@ footer{background:var(--olive-deep);color:rgba(238,240,230,.7);padding:3rem 0 2.
       <p class="coords">Toparlar Mah. Karatepeliler 06 Sokak No:8, Köyceğiz/Muğla</p>
     </div>
     <div class="about-figure reveal">
-      <img src="images/about.jpg" alt="Villa Klemantin özel yüzme havuzu ve bahçesi" loading="lazy" decoding="async">
-      <span class="cap">Özel havuz & bahçe</span>
+      <div class="pf-frame">
+        <img class="pf-img active" src="images/about.jpg" alt="Villa Klemantin özel yüzme havuzu ve bahçesi">
+        <img class="pf-img" src="images/gallery-02.jpg" alt="Villa dış görünüm ve havuz" loading="lazy">
+        <img class="pf-img" src="images/gallery-01.jpg" alt="Villa Klemantin havadan görünüm" loading="lazy">
+        <img class="pf-img" src="images/gallery-07.jpg" alt="Villa çevresi" loading="lazy">
+        <img class="pf-img" src="images/gallery-13.jpg" alt="Doğa ve göl manzarası" loading="lazy">
+        <img class="pf-img" src="images/gallery-19.jpg" alt="Villa dış görünüm" loading="lazy">
+      </div>
+      <button class="pf-nav pf-prev" aria-label="Önceki fotoğraf">&#8249;</button>
+      <button class="pf-nav pf-next" aria-label="Sonraki fotoğraf">&#8250;</button>
+      <span class="cap">Özel havuz &amp; bahçe</span>
+      <div class="pf-dots"></div>
     </div>
   </div>
 </section>
@@ -328,25 +346,20 @@ footer{background:var(--olive-deep);color:rgba(238,240,230,.7);padding:3rem 0 2.
       <p>Fotoğrafa dokunarak büyütün</p>
     </div>
     <div class="grid reveal" id="grid">
-      <figure><img src="images/gallery-01.jpg" alt="Villa Klemantin havadan görünüm"></figure>
-      <figure><img src="images/gallery-02.jpg" alt="Villa ve havuz"></figure>
       <figure><img src="images/gallery-03.jpg" alt="Villa Klemantin"></figure>
       <figure><img src="images/gallery-04.jpg" alt="Villa Klemantin"></figure>
       <figure><img src="images/gallery-05.jpg" alt="Villa Klemantin"></figure>
       <figure><img src="images/gallery-06.jpg" alt="Villa Klemantin"></figure>
-      <figure><img src="images/gallery-07.jpg" alt="Villa çevresi"></figure>
       <figure><img src="images/gallery-08.jpg" alt="Villa Klemantin"></figure>
       <figure><img src="images/gallery-09.jpg" alt="Villa Klemantin"></figure>
       <figure><img src="images/gallery-10.jpg" alt="Villa Klemantin"></figure>
       <figure><img src="images/gallery-11.jpg" alt="Villa Klemantin"></figure>
       <figure><img src="images/gallery-12.jpg" alt="Villa Klemantin"></figure>
-      <figure><img src="images/gallery-13.jpg" alt="Doğa ve göl manzarası"></figure>
       <figure><img src="images/gallery-14.jpg" alt="Villa Klemantin"></figure>
       <figure><img src="images/gallery-15.jpg" alt="Villa Klemantin"></figure>
       <figure><img src="images/gallery-16.jpg" alt="Villa Klemantin"></figure>
       <figure><img src="images/gallery-17.jpg" alt="Villa Klemantin"></figure>
       <figure><img src="images/gallery-18.jpg" alt="Villa Klemantin"></figure>
-      <figure><img src="images/gallery-19.jpg" alt="Villa dış görünüm"></figure>
       <figure><img src="images/gallery-20.jpg" alt="Villa Klemantin"></figure>
       <figure><img src="images/gallery-21.jpg" alt="Villa Klemantin"></figure>
       <figure><img src="images/gallery-22.jpg" alt="Villa Klemantin"></figure>
@@ -444,6 +457,30 @@ menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classL
 // reveal on scroll
 const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// pool & garden slider
+(function(){
+  const fig=document.querySelector('.about-figure');
+  if(!fig)return;
+  const imgs=[...fig.querySelectorAll('.pf-img')];
+  const dotsWrap=fig.querySelector('.pf-dots');
+  let cur=0;
+  imgs.forEach((_,i)=>{
+    const b=document.createElement('button');
+    if(i===0)b.classList.add('active');
+    b.setAttribute('aria-label',(i+1)+'. fotoğraf');
+    b.addEventListener('click',()=>go(i));
+    dotsWrap.appendChild(b);
+  });
+  const dots=[...dotsWrap.children];
+  function go(i){
+    imgs[cur].classList.remove('active');dots[cur].classList.remove('active');
+    cur=(i+imgs.length)%imgs.length;
+    imgs[cur].classList.add('active');dots[cur].classList.add('active');
+  }
+  fig.querySelector('.pf-prev').addEventListener('click',()=>go(cur-1));
+  fig.querySelector('.pf-next').addEventListener('click',()=>go(cur+1));
+})();
 
 // lightbox
 const figs=[...document.querySelectorAll('#grid img')];
