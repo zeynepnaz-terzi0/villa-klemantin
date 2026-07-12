@@ -465,6 +465,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   const imgs=[...fig.querySelectorAll('.pf-img')];
   const dotsWrap=fig.querySelector('.pf-dots');
   let cur=0;
+  imgs.forEach(im=>{if(!im.complete){const p=new Image();p.src=im.src;}});
   imgs.forEach((_,i)=>{
     const b=document.createElement('button');
     if(i===0)b.classList.add('active');
