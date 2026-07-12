@@ -105,6 +105,7 @@ img{display:block;max-width:100%}
 .hero-stats .l{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-top:.35rem}
 .scroll-cue{position:absolute;left:50%;bottom:1.3rem;transform:translateX(-50%);z-index:2;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7);display:flex;flex-direction:column;align-items:center;gap:.5rem}
 .scroll-cue span{width:1px;height:34px;background:linear-gradient(rgba(255,255,255,.7),transparent);animation:drop 2s infinite}
+@media (max-height:720px){.scroll-cue{display:none}}
 @keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
 /* SECTION BASE */
