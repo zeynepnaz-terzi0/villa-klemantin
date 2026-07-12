@@ -144,7 +144,7 @@ section{position:relative}
 .grid figure{margin:0 0 12px;overflow:hidden;border-radius:3px;cursor:pointer;position:relative;background:var(--card);break-inside:avoid}
 .grid img{width:100%;height:auto;display:block;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
 .grid figure:hover img{transform:scale(1.04)}
-.grid figure::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,transparent 62%,rgba(27,35,21,.22));opacity:0;transition:opacity .3s}
+.grid figure::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(160deg,transparent 62%,rgba(27,35,21,.22));opacity:0;transition:opacity .3s}
 .grid figure:hover::after{opacity:1}
 
 /* LOCATION */
@@ -452,7 +452,7 @@ let idx=0;
 function show(i){idx=(i+figs.length)%figs.length;lbImg.src=figs[idx].src;lbImg.alt=figs[idx].alt;lbCount.textContent=(idx+1)+' / '+figs.length;}
 function openLB(i){show(i);lb.classList.add('open');document.body.style.overflow='hidden';}
 function closeLB(){lb.classList.remove('open');document.body.style.overflow='';}
-figs.forEach((im,i)=>im.addEventListener('click',()=>openLB(i)));
+figs.forEach((im,i)=>{(im.closest('figure')||im).addEventListener('click',()=>openLB(i));});
 document.getElementById('lbClose').addEventListener('click',closeLB);
 document.getElementById('lbPrev').addEventListener('click',()=>show(idx-1));
 document.getElementById('lbNext').addEventListener('click',()=>show(idx+1));
