@@ -246,6 +246,34 @@ footer{background:var(--olive-deep);color:rgba(238,240,230,.7);padding:3rem 0 2.
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   .reveal{opacity:1;transform:none}
 }
+
+/* AVAILABILITY / MÜSAİTLİK */
+.avail{background:var(--paper)}
+.avail-head{text-align:center;max-width:46ch;margin:0 auto 2.6rem}
+.avail-head h2{font-size:clamp(2rem,4.6vw,3rem);font-weight:400}
+.avail-head h2 em{font-style:italic;color:var(--clementine)}
+.avail-sub{color:#5a6149;margin-top:1rem}
+.cal-card{width:min(560px,100%);margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:6px;padding:clamp(1.2rem,3vw,2rem);box-shadow:var(--shadow)}
+.cal-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.3rem}
+.cal-title{font-family:"Fraunces",serif;font-size:1.35rem}
+.cal-nav{width:40px;height:40px;border-radius:999px;border:1px solid var(--line);background:none;color:var(--ink);font-size:1.3rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,opacity .2s}
+.cal-nav:hover:not(:disabled){background:var(--card)}
+.cal-nav:disabled{opacity:.28;cursor:default}
+.cal-week{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:6px}
+.cal-week span{text-align:center;font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:#8a9078;font-weight:600}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:.95rem;border-radius:4px}
+.cal-day.empty{visibility:hidden}
+.cal-day.free{background:rgba(120,136,91,.13);color:var(--olive);font-weight:500}
+.cal-day.booked{color:#b5623f;background:rgba(223,106,41,.1);text-decoration:line-through;text-decoration-thickness:1.5px}
+.cal-day.past{color:#c6c4b8}
+.cal-day.today{outline:2px solid var(--clementine);outline-offset:-2px;font-weight:700}
+.cal-legend{display:flex;justify-content:center;flex-wrap:wrap;gap:1.4rem;margin-top:1.6rem;font-size:.82rem;color:#5a6149}
+.cal-legend span{display:inline-flex;align-items:center;gap:.5rem}
+.cal-legend i{width:14px;height:14px;border-radius:3px;display:inline-block}
+.lg-free{background:rgba(120,136,91,.38)}
+.lg-booked{background:rgba(223,106,41,.32)}
+.lg-today{border:2px solid var(--clementine)}
 </style>
 </head>
 <body>
@@ -264,6 +292,7 @@ footer{background:var(--olive-deep);color:rgba(238,240,230,.7);padding:3rem 0 2.
     <li><a href="#villa">Villa</a></li>
     <li><a href="#galeri">Galeri</a></li>
     <li><a href="#konum">Konum</a></li>
+    <li><a href="#musaitlik">Müsaitlik</a></li>
     <li><a href="#iletisim">İletişim</a></li>
   </ul>
   <a class="wa-btn" href="https://wa.me/905457601789" target="_blank" rel="noopener">
@@ -403,6 +432,30 @@ footer{background:var(--olive-deep);color:rgba(238,240,230,.7);padding:3rem 0 2.
   </div>
 </section>
 
+<section class="avail pad" id="musaitlik">
+  <div class="wrap reveal">
+    <div class="avail-head">
+      <p class="eyebrow" style="justify-content:center">Müsaitlik</p>
+      <h2>Villa <em>takvimi</em></h2>
+      <p class="avail-sub">Boş günleri buradan görebilirsiniz. Uygun tarihinizi WhatsApp'tan bize yazın; rezervasyonu birlikte kesinleştirelim.</p>
+    </div>
+    <div class="cal-card">
+      <div class="cal-top">
+        <button class="cal-nav" id="calPrev" aria-label="Önceki ay">&#8249;</button>
+        <div class="cal-title" id="calTitle"></div>
+        <button class="cal-nav" id="calNext" aria-label="Sonraki ay">&#8250;</button>
+      </div>
+      <div class="cal-week"><span>Pzt</span><span>Sal</span><span>Çar</span><span>Per</span><span>Cum</span><span>Cmt</span><span>Paz</span></div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div class="cal-legend">
+        <span><i class="lg-free"></i>Müsait</span>
+        <span><i class="lg-booked"></i>Dolu</span>
+        <span><i class="lg-today"></i>Bugün</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="contact pad" id="iletisim">
   <div class="wrap reveal">
     <h2>Tatilinizi <em>Klemantin'de</em> geçirin</h2>
@@ -457,6 +510,56 @@ menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classL
 // reveal on scroll
 const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// ===== MÜSAİTLİK TAKVİMİ =====
+// DOLU (rezerve) tarihler buraya eklenir. Aralık: başlangıç ve bitiş günü DAHİL doludur.
+// Tek gün için start ile end aynı yazılır. Örnek:
+//   {start:'2026-07-20', end:'2026-07-27'},
+//   {start:'2026-08-05', end:'2026-08-05'},
+const BOOKED=[
+];
+(function(){
+  const grid=document.getElementById('calGrid');
+  if(!grid)return;
+  const titleEl=document.getElementById('calTitle');
+  const prevBtn=document.getElementById('calPrev');
+  const nextBtn=document.getElementById('calNext');
+  const MONTHS=['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+  const pad=n=>String(n).padStart(2,'0');
+  const key=(y,m,d)=>y+'-'+pad(m+1)+'-'+pad(d);
+  const bookedSet=new Set();
+  BOOKED.forEach(r=>{
+    const s=new Date(r.start+'T00:00:00'), e=new Date((r.end||r.start)+'T00:00:00');
+    for(let d=new Date(s); d<=e; d.setDate(d.getDate()+1)){
+      bookedSet.add(key(d.getFullYear(),d.getMonth(),d.getDate()));
+    }
+  });
+  const today=new Date(); today.setHours(0,0,0,0);
+  const curY=today.getFullYear(), curM=today.getMonth();
+  const view=new Date(curY,curM,1);
+  function render(){
+    const y=view.getFullYear(), m=view.getMonth();
+    titleEl.textContent=MONTHS[m]+' '+y;
+    grid.innerHTML='';
+    let off=(new Date(y,m,1).getDay()+6)%7;
+    const days=new Date(y,m+1,0).getDate();
+    for(let i=0;i<off;i++){const c=document.createElement('div');c.className='cal-day empty';grid.appendChild(c);}
+    for(let d=1;d<=days;d++){
+      const cell=document.createElement('div');
+      cell.className='cal-day';cell.textContent=d;
+      const dt=new Date(y,m,d);
+      if(dt<today){cell.classList.add('past');}
+      else if(bookedSet.has(key(y,m,d))){cell.classList.add('booked');cell.title='Dolu';}
+      else{cell.classList.add('free');cell.title='Müsait';}
+      if(y===curY&&m===curM&&d===today.getDate())cell.classList.add('today');
+      grid.appendChild(cell);
+    }
+    prevBtn.disabled=(y===curY&&m===curM);
+  }
+  prevBtn.addEventListener('click',()=>{if(prevBtn.disabled)return;view.setMonth(view.getMonth()-1);render();});
+  nextBtn.addEventListener('click',()=>{view.setMonth(view.getMonth()+1);render();});
+  render();
+})();
 
 // pool & garden slider
 (function(){
