@@ -295,6 +295,7 @@ footer{background:var(--olive-deep);color:rgba(238,240,230,.7);padding:3rem 0 2.
 .bk-actions .cbtn{width:100%;justify-content:center;border:0;cursor:pointer;font-family:inherit}
 .bk-actions .cbtn.ghost{border:1.5px solid var(--ink);background:transparent}
 .bk-msg{font-size:.8rem;color:#b5623f;min-height:1.1em;line-height:1.4}
+.bk-msg.ok{color:var(--leaf)}
 .bk-note{font-size:.74rem;color:#8a9078;line-height:1.5;margin-top:.2rem}
 @media(max-width:900px){.avail-grid{grid-template-columns:1fr;max-width:560px}}
 </style>
@@ -652,17 +653,22 @@ const BOOKED=[
     prevBtn.disabled=(y===curY&&m===curM);
   }
   const bkForm=document.getElementById('bkForm');
-  const send=mail=>{
+  const MAIL='villaklemantin0@gmail.com';
+  const setMsg=(t,ok)=>{msgEl.textContent=t;msgEl.classList.toggle('ok',!!ok);};
+  const send=async mail=>{
     const name=document.getElementById('bkName').value.trim();
     const phone=document.getElementById('bkPhone').value.trim();
     const email=document.getElementById('bkEmail').value.trim();
-    if(!selStart||!selEnd){msgEl.textContent='Lütfen takvimden giriş ve çıkış tarihini seçin.';return;}
-    if(!name){msgEl.textContent='Lütfen adınızı yazın.';return;}
-    if(!phone){msgEl.textContent='Lütfen telefon numaranızı yazın.';return;}
-    msgEl.textContent='';
+    if(!selStart||!selEnd){setMsg('Lütfen takvimden giriş ve çıkış tarihini seçin.');return;}
+    if(!name){setMsg('Lütfen adınızı yazın.');return;}
+    if(!phone){setMsg('Lütfen telefon numaranızı yazın.');return;}
+    setMsg('');
     const lines='Ad Soyad: '+name+'\nTelefon: '+phone+(email?'\nE-posta: '+email:'')+'\nTarihler: '+datesEl.value;
     if(mail){
-      location.href='mailto:villaklemantin0@gmail.com?subject='+encodeURIComponent('Villa Klemantin — Rezervasyon talebi')+'&body='+encodeURIComponent(lines+'\n');
+      let copied=false;
+      try{await navigator.clipboard.writeText('Villa Klemantin — Rezervasyon talebi\n\n'+lines);copied=true;}catch(e){}
+      setMsg(copied?'E-posta uygulamanız açılmazsa: bilgiler panoya kopyalandı, '+MAIL+' adresine yapıştırıp gönderebilirsiniz.':'E-posta uygulamanız açılmazsa '+MAIL+' adresine yazabilirsiniz.',true);
+      location.href='mailto:'+MAIL+'?subject='+encodeURIComponent('Villa Klemantin — Rezervasyon talebi')+'&body='+encodeURIComponent(lines+'\n');
     } else {
       window.open('https://wa.me/905457601789?text='+encodeURIComponent('Merhaba, Villa Klemantin için rezervasyon talebim:\n\n'+lines),'_blank','noopener');
     }
