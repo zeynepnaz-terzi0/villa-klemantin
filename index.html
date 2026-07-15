@@ -499,9 +499,9 @@ footer{background:var(--olive-deep);color:rgba(238,240,230,.7);padding:3rem 0 2.
         <p class="bk-msg" id="bkMsg" role="status"></p>
         <div class="bk-actions">
           <button type="submit" class="cbtn primary">WhatsApp ile gönder</button>
-          <button type="button" class="cbtn ghost" id="bkMail">E-posta ile gönder</button>
+          <button type="button" class="cbtn ghost" id="bkMail">Gmail ile gönder</button>
         </div>
-        <p class="bk-note">Talebiniz WhatsApp mesajı ya da e-posta taslağı olarak açılır; göndermeden önce kontrol edebilirsiniz. Rezervasyon, tarafımızca onaylandığında kesinleşir.</p>
+        <p class="bk-note">Talebiniz WhatsApp mesajı ya da Gmail penceresi olarak hazır açılır; göndermeden önce kontrol edebilirsiniz. Rezervasyon, tarafımızca onaylandığında kesinleşir.</p>
       </form>
     </div>
   </div>
@@ -655,7 +655,7 @@ const BOOKED=[
   const bkForm=document.getElementById('bkForm');
   const MAIL='villaklemantin0@gmail.com';
   const setMsg=(t,ok)=>{msgEl.textContent=t;msgEl.classList.toggle('ok',!!ok);};
-  const send=async mail=>{
+  const send=mail=>{
     const name=document.getElementById('bkName').value.trim();
     const phone=document.getElementById('bkPhone').value.trim();
     const email=document.getElementById('bkEmail').value.trim();
@@ -665,10 +665,8 @@ const BOOKED=[
     setMsg('');
     const lines='Ad Soyad: '+name+'\nTelefon: '+phone+(email?'\nE-posta: '+email:'')+'\nTarihler: '+datesEl.value;
     if(mail){
-      let copied=false;
-      try{await navigator.clipboard.writeText('Villa Klemantin — Rezervasyon talebi\n\n'+lines);copied=true;}catch(e){}
-      setMsg(copied?'E-posta uygulamanız açılmazsa: bilgiler panoya kopyalandı, '+MAIL+' adresine yapıştırıp gönderebilirsiniz.':'E-posta uygulamanız açılmazsa '+MAIL+' adresine yazabilirsiniz.',true);
-      location.href='mailto:'+MAIL+'?subject='+encodeURIComponent('Villa Klemantin — Rezervasyon talebi')+'&body='+encodeURIComponent(lines+'\n');
+      const w=window.open('https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent(MAIL)+'&su='+encodeURIComponent('Villa Klemantin — Rezervasyon talebi')+'&body='+encodeURIComponent(lines),'_blank','noopener');
+      if(!w)setMsg('Pencere engellendi. '+MAIL+' adresine doğrudan yazabilirsiniz.');
     } else {
       window.open('https://wa.me/905457601789?text='+encodeURIComponent('Merhaba, Villa Klemantin için rezervasyon talebim:\n\n'+lines),'_blank','noopener');
     }
