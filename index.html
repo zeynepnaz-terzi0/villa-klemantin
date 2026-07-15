@@ -287,6 +287,7 @@ footer{background:var(--olive-deep);color:rgba(238,240,230,.7);padding:3rem 0 2.
 .bk-card{background:#fff;border:1px solid var(--line);border-radius:6px;padding:clamp(1.2rem,3vw,1.7rem);box-shadow:var(--shadow);display:flex;flex-direction:column;gap:.85rem}
 .bk-card h3{font-family:"Fraunces",serif;font-size:1.28rem;font-weight:500}
 .bk-card label{display:block;font-size:.72rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#5a6149}
+.bk-card label .opt{font-weight:400;text-transform:none;letter-spacing:normal;color:#8a9078}
 .bk-card input{width:100%;margin-top:.35rem;padding:.68rem .8rem;border:1px solid var(--line);border-radius:4px;font-family:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);text-transform:none;letter-spacing:normal}
 .bk-card input:focus{outline:2px solid var(--clementine);outline-offset:-1px}
 .bk-card input[readonly]{background:var(--card);cursor:default;color:var(--olive);font-weight:500}
@@ -490,6 +491,10 @@ footer{background:var(--olive-deep);color:rgba(238,240,230,.7);padding:3rem 0 2.
           <label for="bkPhone">Telefon</label>
           <input type="tel" id="bkPhone" autocomplete="tel" placeholder="05xx xxx xx xx">
         </div>
+        <div>
+          <label for="bkEmail">E-posta <span class="opt">(isteğe bağlı)</span></label>
+          <input type="email" id="bkEmail" autocomplete="email" placeholder="ornek@eposta.com">
+        </div>
         <p class="bk-msg" id="bkMsg" role="status"></p>
         <div class="bk-actions">
           <button type="submit" class="cbtn primary">WhatsApp ile gönder</button>
@@ -650,11 +655,12 @@ const BOOKED=[
   const send=mail=>{
     const name=document.getElementById('bkName').value.trim();
     const phone=document.getElementById('bkPhone').value.trim();
+    const email=document.getElementById('bkEmail').value.trim();
     if(!selStart||!selEnd){msgEl.textContent='Lütfen takvimden giriş ve çıkış tarihini seçin.';return;}
     if(!name){msgEl.textContent='Lütfen adınızı yazın.';return;}
     if(!phone){msgEl.textContent='Lütfen telefon numaranızı yazın.';return;}
     msgEl.textContent='';
-    const lines='Ad Soyad: '+name+'\nTelefon: '+phone+'\nTarihler: '+datesEl.value;
+    const lines='Ad Soyad: '+name+'\nTelefon: '+phone+(email?'\nE-posta: '+email:'')+'\nTarihler: '+datesEl.value;
     if(mail){
       location.href='mailto:villaklemantin0@gmail.com?subject='+encodeURIComponent('Villa Klemantin — Rezervasyon talebi')+'&body='+encodeURIComponent(lines+'\n');
     } else {
