@@ -253,7 +253,8 @@ footer{background:var(--olive-deep);color:rgba(238,240,230,.7);padding:3rem 0 2.
 .avail-head h2{font-size:clamp(2rem,4.6vw,3rem);font-weight:400}
 .avail-head h2 em{font-style:italic;color:var(--clementine)}
 .avail-sub{color:#5a6149;margin-top:1rem}
-.cal-card{width:min(560px,100%);margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:6px;padding:clamp(1.2rem,3vw,2rem);box-shadow:var(--shadow)}
+.avail-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,340px);gap:1.6rem;align-items:start;max-width:940px;margin:0 auto}
+.cal-card{width:100%;background:#fff;border:1px solid var(--line);border-radius:6px;padding:clamp(1.2rem,3vw,2rem);box-shadow:var(--shadow)}
 .cal-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.3rem}
 .cal-title{font-family:"Fraunces",serif;font-size:1.35rem}
 .cal-nav{width:40px;height:40px;border-radius:999px;border:1px solid var(--line);background:none;color:var(--ink);font-size:1.3rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,opacity .2s}
@@ -274,6 +275,27 @@ footer{background:var(--olive-deep);color:rgba(238,240,230,.7);padding:3rem 0 2.
 .lg-free{background:rgba(120,136,91,.38)}
 .lg-booked{background:rgba(223,106,41,.32)}
 .lg-today{border:2px solid var(--clementine)}
+
+/* date selection */
+.cal-day.free{cursor:pointer}
+.cal-day.free:hover{background:rgba(120,136,91,.28)}
+.cal-day.inrange{background:rgba(223,106,41,.16);color:var(--ink)}
+.cal-day.sel{background:var(--clementine);color:#fff;font-weight:700}
+.cal-day.sel.today{outline-color:var(--olive-deep)}
+
+/* BOOKING FORM */
+.bk-card{background:#fff;border:1px solid var(--line);border-radius:6px;padding:clamp(1.2rem,3vw,1.7rem);box-shadow:var(--shadow);display:flex;flex-direction:column;gap:.85rem}
+.bk-card h3{font-family:"Fraunces",serif;font-size:1.28rem;font-weight:500}
+.bk-card label{display:block;font-size:.72rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#5a6149}
+.bk-card input{width:100%;margin-top:.35rem;padding:.68rem .8rem;border:1px solid var(--line);border-radius:4px;font-family:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);text-transform:none;letter-spacing:normal}
+.bk-card input:focus{outline:2px solid var(--clementine);outline-offset:-1px}
+.bk-card input[readonly]{background:var(--card);cursor:default;color:var(--olive);font-weight:500}
+.bk-actions{display:flex;flex-direction:column;gap:.55rem;margin-top:.3rem}
+.bk-actions .cbtn{width:100%;justify-content:center;border:0;cursor:pointer;font-family:inherit}
+.bk-actions .cbtn.ghost{border:1.5px solid var(--ink);background:transparent}
+.bk-msg{font-size:.8rem;color:#b5623f;min-height:1.1em;line-height:1.4}
+.bk-note{font-size:.74rem;color:#8a9078;line-height:1.5;margin-top:.2rem}
+@media(max-width:900px){.avail-grid{grid-template-columns:1fr;max-width:560px}}
 </style>
 </head>
 <body>
@@ -437,21 +459,44 @@ footer{background:var(--olive-deep);color:rgba(238,240,230,.7);padding:3rem 0 2.
     <div class="avail-head">
       <p class="eyebrow" style="justify-content:center">Müsaitlik</p>
       <h2>Villa <em>takvimi</em></h2>
-      <p class="avail-sub">Boş günleri buradan görebilirsiniz. Uygun tarihinizi WhatsApp'tan bize yazın; rezervasyonu birlikte kesinleştirelim.</p>
+      <p class="avail-sub">Takvimden giriş ve çıkış tarihinizi seçin, formu doldurup bize gönderin.</p>
     </div>
-    <div class="cal-card">
-      <div class="cal-top">
-        <button class="cal-nav" id="calPrev" aria-label="Önceki ay">&#8249;</button>
-        <div class="cal-title" id="calTitle"></div>
-        <button class="cal-nav" id="calNext" aria-label="Sonraki ay">&#8250;</button>
+    <div class="avail-grid">
+      <div class="cal-card">
+        <div class="cal-top">
+          <button class="cal-nav" id="calPrev" aria-label="Önceki ay">&#8249;</button>
+          <div class="cal-title" id="calTitle"></div>
+          <button class="cal-nav" id="calNext" aria-label="Sonraki ay">&#8250;</button>
+        </div>
+        <div class="cal-week"><span>Pzt</span><span>Sal</span><span>Çar</span><span>Per</span><span>Cum</span><span>Cmt</span><span>Paz</span></div>
+        <div class="cal-grid" id="calGrid"></div>
+        <div class="cal-legend">
+          <span><i class="lg-free"></i>Müsait</span>
+          <span><i class="lg-booked"></i>Dolu</span>
+          <span><i class="lg-today"></i>Bugün</span>
+        </div>
       </div>
-      <div class="cal-week"><span>Pzt</span><span>Sal</span><span>Çar</span><span>Per</span><span>Cum</span><span>Cmt</span><span>Paz</span></div>
-      <div class="cal-grid" id="calGrid"></div>
-      <div class="cal-legend">
-        <span><i class="lg-free"></i>Müsait</span>
-        <span><i class="lg-booked"></i>Dolu</span>
-        <span><i class="lg-today"></i>Bugün</span>
-      </div>
+      <form class="bk-card" id="bkForm" novalidate>
+        <h3>Rezervasyon talebi</h3>
+        <div>
+          <label for="bkDates">Tarihler</label>
+          <input type="text" id="bkDates" readonly placeholder="Takvimden seçin">
+        </div>
+        <div>
+          <label for="bkName">Ad Soyad</label>
+          <input type="text" id="bkName" autocomplete="name" placeholder="Adınız Soyadınız">
+        </div>
+        <div>
+          <label for="bkPhone">Telefon</label>
+          <input type="tel" id="bkPhone" autocomplete="tel" placeholder="05xx xxx xx xx">
+        </div>
+        <p class="bk-msg" id="bkMsg" role="status"></p>
+        <div class="bk-actions">
+          <button type="submit" class="cbtn primary">WhatsApp ile gönder</button>
+          <button type="button" class="cbtn ghost" id="bkMail">E-posta ile gönder</button>
+        </div>
+        <p class="bk-note">Talebiniz WhatsApp mesajı ya da e-posta taslağı olarak açılır; göndermeden önce kontrol edebilirsiniz. Rezervasyon, tarafımızca onaylandığında kesinleşir.</p>
+      </form>
     </div>
   </div>
 </section>
@@ -468,6 +513,10 @@ footer{background:var(--olive-deep);color:rgba(238,240,230,.7);padding:3rem 0 2.
       <a class="cbtn ghost" href="tel:+905457601789">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
         +90 545 760 17 89
+      </a>
+      <a class="cbtn ghost" href="mailto:villaklemantin0@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        villaklemantin0@gmail.com
       </a>
     </div>
   </div>
@@ -541,6 +590,38 @@ const BOOKED=[
   const today=new Date(); today.setHours(0,0,0,0);
   const curY=today.getFullYear(), curM=today.getMonth();
   const view=new Date(curY,curM,1);
+  const datesEl=document.getElementById('bkDates');
+  const msgEl=document.getElementById('bkMsg');
+  let selStart=null, selEnd=null;
+  const fmt=d=>d.getDate()+' '+MONTHS[d.getMonth()]+' '+d.getFullYear();
+  const hasBookedBetween=(a,b)=>{
+    for(let d=new Date(a); d<=b; d.setDate(d.getDate()+1)){
+      if(bookedSet.has(key(d.getFullYear(),d.getMonth(),d.getDate())))return true;
+    }
+    return false;
+  };
+  function pick(dt){
+    msgEl.textContent='';
+    if(!selStart||selEnd){selStart=dt;selEnd=null;}
+    else if(dt.getTime()===selStart.getTime()){selStart=null;selEnd=null;}
+    else if(dt<selStart){selStart=dt;}
+    else if(hasBookedBetween(selStart,dt)){
+      msgEl.textContent='Seçtiğiniz aralıkta dolu gün var. Lütfen farklı bir tarih seçin.';
+      selStart=dt;selEnd=null;
+    }
+    else{selEnd=dt;}
+    render();updateDates();
+  }
+  function updateDates(){
+    if(selStart&&selEnd){
+      const nights=Math.round((selEnd-selStart)/86400000);
+      datesEl.value=fmt(selStart)+' → '+fmt(selEnd)+(nights?' ('+nights+' gece)':'');
+    } else if(selStart){
+      datesEl.value=fmt(selStart)+' → çıkış tarihini seçin';
+    } else {
+      datesEl.value='';
+    }
+  }
   function render(){
     const y=view.getFullYear(), m=view.getMonth();
     titleEl.textContent=MONTHS[m]+' '+y;
@@ -554,12 +635,34 @@ const BOOKED=[
       const dt=new Date(y,m,d);
       if(dt<today){cell.classList.add('past');}
       else if(bookedSet.has(key(y,m,d))){cell.classList.add('booked');cell.title='Dolu';}
-      else{cell.classList.add('free');cell.title='Müsait';}
+      else{
+        cell.classList.add('free');cell.title='Müsait';
+        cell.addEventListener('click',()=>pick(dt));
+        if(selStart&&selEnd&&dt>selStart&&dt<selEnd)cell.classList.add('inrange');
+        if((selStart&&dt.getTime()===selStart.getTime())||(selEnd&&dt.getTime()===selEnd.getTime()))cell.classList.add('sel');
+      }
       if(y===curY&&m===curM&&d===today.getDate())cell.classList.add('today');
       grid.appendChild(cell);
     }
     prevBtn.disabled=(y===curY&&m===curM);
   }
+  const bkForm=document.getElementById('bkForm');
+  const send=mail=>{
+    const name=document.getElementById('bkName').value.trim();
+    const phone=document.getElementById('bkPhone').value.trim();
+    if(!selStart||!selEnd){msgEl.textContent='Lütfen takvimden giriş ve çıkış tarihini seçin.';return;}
+    if(!name){msgEl.textContent='Lütfen adınızı yazın.';return;}
+    if(!phone){msgEl.textContent='Lütfen telefon numaranızı yazın.';return;}
+    msgEl.textContent='';
+    const lines='Ad Soyad: '+name+'\nTelefon: '+phone+'\nTarihler: '+datesEl.value;
+    if(mail){
+      location.href='mailto:villaklemantin0@gmail.com?subject='+encodeURIComponent('Villa Klemantin — Rezervasyon talebi')+'&body='+encodeURIComponent(lines+'\n');
+    } else {
+      window.open('https://wa.me/905457601789?text='+encodeURIComponent('Merhaba, Villa Klemantin için rezervasyon talebim:\n\n'+lines),'_blank','noopener');
+    }
+  };
+  bkForm.addEventListener('submit',e=>{e.preventDefault();send(false);});
+  document.getElementById('bkMail').addEventListener('click',()=>send(true));
   prevBtn.addEventListener('click',()=>{if(prevBtn.disabled)return;view.setMonth(view.getMonth()-1);render();});
   nextBtn.addEventListener('click',()=>{view.setMonth(view.getMonth()+1);render();});
   render();
