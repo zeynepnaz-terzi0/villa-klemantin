@@ -567,15 +567,14 @@ const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.ta
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 // ===== REZERVASYON TAKVİMİ =====
-// DOLU (rezerve) tarihler buraya eklenir. Aralık: başlangıç ve bitiş günü DAHİL doludur.
-// Tek gün için start ile end aynı yazılır. Örnek:
-//   {start:'2026-07-20', end:'2026-07-27'},
-//   {start:'2026-08-05', end:'2026-08-05'},
+// DOLU (rezerve) tarihler. start ve end günleri DAHİL dolu gösterilir.
+// end = son konaklanan gece; çıkış gününe yeni misafir girebildiği için o gün aralığa YAZILMAZ.
+// Örn. 20 giriş - 27 çıkış bir rezervasyon: {start:'2026-07-20', end:'2026-07-26'}
 const BOOKED=[
   {start:'2026-07-15', end:'2026-07-16'},
-  {start:'2026-07-17', end:'2026-07-19'},
-  {start:'2026-08-16', end:'2026-08-22'},
-  {start:'2026-08-29', end:'2026-09-04'},
+  {start:'2026-07-17', end:'2026-07-18'},
+  {start:'2026-08-16', end:'2026-08-21'},
+  {start:'2026-08-29', end:'2026-09-03'},
 ];
 (function(){
   const grid=document.getElementById('calGrid');
