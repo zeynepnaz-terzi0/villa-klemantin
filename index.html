@@ -551,7 +551,7 @@ footer{background:var(--olive-deep);color:rgba(238,240,230,.7);padding:3rem 0 2.
   <div class="lb-count" id="lbCount"></div>
 </div>
 
-<script src="booked.js"></script>
+<script>document.write('<script src="booked.js?t=' + Date.now() + '"><\/script>');</script>
 <script>
 document.getElementById('yr').textContent=new Date().getFullYear();
 

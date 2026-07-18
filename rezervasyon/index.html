@@ -343,7 +343,7 @@ body{min-height:100vh}
     </div>
   </div>
 </section>
-<script src="../booked.js"></script>
+<script>document.write('<script src="../booked.js?t=' + Date.now() + '"><\/script>');</script>
 <script>
 (function(){
   const grid=document.getElementById('calGrid');
