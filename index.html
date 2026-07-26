@@ -81,6 +81,11 @@ img{display:block;max-width:100%}
 .wa-btn:hover{background:#c85a1f;transform:translateY(-1px)}
 .nav-toggle{display:none;background:none;border:0;cursor:pointer;padding:.4rem;color:#fff}
 .nav.scrolled .nav-toggle{color:var(--ink)}
+.nav-right{display:flex;align-items:center;gap:.7rem}
+.lang-btn{font-family:inherit;font-size:.82rem;font-weight:600;letter-spacing:.04em;color:#fff;background:transparent;border:1.5px solid rgba(255,255,255,.55);border-radius:999px;padding:.34rem .66rem;cursor:pointer;line-height:1;transition:color .4s,border-color .3s,background .2s}
+.lang-btn:hover{border-color:#fff;background:rgba(255,255,255,.12)}
+.nav.scrolled .lang-btn{color:var(--ink);border-color:rgba(35,39,29,.3)}
+.nav.scrolled .lang-btn:hover{border-color:var(--ink);background:rgba(35,39,29,.06)}
 
 /* HERO */
 .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;isolation:isolate}
@@ -313,20 +318,23 @@ footer{background:var(--olive-deep);color:rgba(238,240,230,.7);padding:3rem 0 2.
 <nav class="nav" id="nav">
   <a href="#top" class="brand"><svg class="mark"><use href="#clem"/></svg><span><b>Villa</b> Klemantin</span></a>
   <ul class="nav-links" id="menu">
-    <li><a href="#villa">Villa</a></li>
-    <li><a href="#galeri">Galeri</a></li>
-    <li><a href="#rezervasyon">Rezervasyon</a></li>
-    <li><a href="rezervasyon/">Takvim</a></li>
-    <li><a href="#konum">Konum</a></li>
-    <li><a href="#iletisim">İletişim</a></li>
+    <li><a href="#villa" data-i18n="nav_villa">Villa</a></li>
+    <li><a href="#galeri" data-i18n="nav_gallery">Galeri</a></li>
+    <li><a href="#rezervasyon" data-i18n="nav_booking">Rezervasyon</a></li>
+    <li><a href="rezervasyon/" data-i18n="nav_calendar">Takvim</a></li>
+    <li><a href="#konum" data-i18n="nav_location">Konum</a></li>
+    <li><a href="#iletisim" data-i18n="nav_contact">İletişim</a></li>
   </ul>
-  <a class="wa-btn" href="https://wa.me/905457601789" target="_blank" rel="noopener">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.7 15l-1.3 5 5.1-1.3A10 10 0 1 0 12 2zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-1.9 1-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.1.3.7 1.1 1.4 1.8 1 .8 1.7 1.1 2 1.2.2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.6-.1l1.8.9c.3.1.4.2.5.3.1.2.1.7-.1 1.3z"/></svg>
-    WhatsApp
-  </a>
-  <button class="nav-toggle" id="toggle" aria-label="Menü">
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-  </button>
+  <div class="nav-right">
+    <a class="wa-btn" href="https://wa.me/905457601789" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.7 15l-1.3 5 5.1-1.3A10 10 0 1 0 12 2zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-1.9 1-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.1.3.7 1.1 1.4 1.8 1 .8 1.7 1.1 2 1.2.2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.6-.1l1.8.9c.3.1.4.2.5.3.1.2.1.7-.1 1.3z"/></svg>
+      WhatsApp
+    </a>
+    <button class="lang-btn" type="button" aria-label="Language / Dil">EN</button>
+    <button class="nav-toggle" id="toggle" data-i18n-aria="aria_menu" aria-label="Menü">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
 </nav>
 
 <header class="hero" id="top">
@@ -334,24 +342,24 @@ footer{background:var(--olive-deep);color:rgba(238,240,230,.7);padding:3rem 0 2.
   <div class="hero-inner reveal">
     <p class="eyebrow">Köyceğiz · Muğla</p>
     <h1>Villa Klemantin</h1>
-    <p class="hero-sub">Zeytin ağaçları, dağlar ve Köyceğiz Gölü'nün arasında — özel havuzlu, sakin bir kaçış.</p>
+    <p class="hero-sub" data-i18n="hero_sub">Zeytin ağaçları, dağlar ve Köyceğiz Gölü'nün arasında — özel havuzlu, sakin bir kaçış.</p>
     <div class="hero-stats">
-      <div><span class="n">3+1</span><span class="l">Yatak odası</span></div>
-      <div><span class="n">5-6</span><span class="l">Misafir</span></div>
-      <div><span class="n">Özel</span><span class="l">Yüzme havuzu</span></div>
-      <div><span class="n">10 dk</span><span class="l">Şelaleye</span></div>
+      <div><span class="n">3+1</span><span class="l" data-i18n="stat_bedrooms">Yatak odası</span></div>
+      <div><span class="n">5-6</span><span class="l" data-i18n="stat_guests">Misafir</span></div>
+      <div><span class="n" data-i18n="stat_pool_v">Özel</span><span class="l" data-i18n="stat_pool">Yüzme havuzu</span></div>
+      <div><span class="n" data-i18n="stat_wf_v">10 dk</span><span class="l" data-i18n="stat_wf">Şelaleye</span></div>
     </div>
   </div>
-  <div class="scroll-cue">Keşfet<span></span></div>
+  <div class="scroll-cue" data-i18n="scroll_cue">Keşfet<span></span></div>
 </header>
 
 <section class="villa pad" id="villa">
   <div class="wrap about">
     <div class="reveal">
-      <p class="eyebrow">Villa</p>
-      <h2>Doğanın içinde, <em>size ait</em> bir sessizlik.</h2>
-      <p>Villa Klemantin, Köyceğiz'de, yüzyıllık zeytinliklerin ortasında yeni yapılmış modern bir tatil villasıdır. Özel yüzme havuzu, geniş bahçesi ve her yönden dağ manzarasıyla; kalabalıktan uzak, tamamen size ait bir tatil sunar.</p>
-      <p>Sabah kuş sesleriyle uyanın, günü havuz başında geçirin, akşam bahçede mangalın keyfini çıkarın. Köyceğiz merkezine ve ünlü Toparlar Şelalesi'ne yalnızca birkaç dakika; deniz, göl ve antik kentler ise kısa birer sürüş uzağınızda.</p>
+      <p class="eyebrow" data-i18n="villa_eyebrow">Villa</p>
+      <h2 data-i18n="villa_h2">Doğanın içinde, <em>size ait</em> bir sessizlik.</h2>
+      <p data-i18n="villa_p1">Villa Klemantin, Köyceğiz'de, yüzyıllık zeytinliklerin ortasında yeni yapılmış modern bir tatil villasıdır. Özel yüzme havuzu, geniş bahçesi ve her yönden dağ manzarasıyla; kalabalıktan uzak, tamamen size ait bir tatil sunar.</p>
+      <p data-i18n="villa_p2">Sabah kuş sesleriyle uyanın, günü havuz başında geçirin, akşam bahçede mangalın keyfini çıkarın. Köyceğiz merkezine ve ünlü Toparlar Şelalesi'ne yalnızca birkaç dakika; deniz, göl ve antik kentler ise kısa birer sürüş uzağınızda.</p>
       <p class="coords">Toparlar Mah. Karatepeliler 06 Sokak No:8, Köyceğiz/Muğla</p>
     </div>
     <div class="about-figure reveal">
@@ -363,9 +371,9 @@ footer{background:var(--olive-deep);color:rgba(238,240,230,.7);padding:3rem 0 2.
         <img class="pf-img" src="images/gallery-13.jpg" alt="Doğa ve göl manzarası" loading="lazy">
         <img class="pf-img" src="images/gallery-19.jpg" alt="Villa dış görünüm" loading="lazy">
       </div>
-      <button class="pf-nav pf-prev" aria-label="Önceki fotoğraf">&#8249;</button>
-      <button class="pf-nav pf-next" aria-label="Sonraki fotoğraf">&#8250;</button>
-      <span class="cap">Özel havuz &amp; bahçe</span>
+      <button class="pf-nav pf-prev" data-i18n-aria="aria_prevphoto" aria-label="Önceki fotoğraf">&#8249;</button>
+      <button class="pf-nav pf-next" data-i18n-aria="aria_nextphoto" aria-label="Sonraki fotoğraf">&#8250;</button>
+      <span class="cap" data-i18n="villa_cap">Özel havuz &amp; bahçe</span>
       <div class="pf-dots"></div>
     </div>
   </div>
@@ -374,18 +382,18 @@ footer{background:var(--olive-deep);color:rgba(238,240,230,.7);padding:3rem 0 2.
 <section class="features pad" id="ozellikler">
   <div class="wrap">
     <div class="feat-head reveal">
-      <p class="eyebrow">Olanaklar</p>
-      <h2>Konforlu bir tatil için gereken her şey.</h2>
+      <p class="eyebrow" data-i18n="feat_eyebrow">Olanaklar</p>
+      <h2 data-i18n="feat_h2">Konforlu bir tatil için gereken her şey.</h2>
     </div>
     <div class="feat-grid reveal">
-      <div class="feat"><svg viewBox="0 0 24 24"><path d="M2 18c2-1.5 3.5-1.5 5 0s3.5 1.5 5 0 3.5-1.5 5 0 3.5 1.5 5 0M4 14V6a2 2 0 0 1 2-2h1M4 9h3"/></svg><h3>Özel yüzme havuzu</h3><p>Yalnızca size ait, güneş alan geniş havuz ve güneşlenme terası.</p></div>
-      <div class="feat"><svg viewBox="0 0 24 24"><path d="M3 20l6-8 4 5 3-4 5 7zM3 20h18"/><circle cx="8" cy="6" r="2"/></svg><h3>Dağ & doğa manzarası</h3><p>Her odadan ve bahçeden zeytinlik ve dağ silüeti.</p></div>
-      <div class="feat"><svg viewBox="0 0 24 24"><path d="M4 20V9l8-5 8 5v11M9 20v-5h6v5"/></svg><h3>3+1 · 5-6 misafir</h3><p>Üç yatak odası ve ferah bir salon; aileler ve küçük gruplar için ideal.</p></div>
-      <div class="feat"><svg viewBox="0 0 24 24"><path d="M3 11h18M5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M6 11v8M18 11v8"/></svg><h3>Tam donanımlı mutfak</h3><p>Buzdolabı, bulaşık makinesi, çamaşır makinesi, ankastre fırın, ocak ve tüm ekipmanlar hazır.</p></div>
-      <div class="feat"><svg viewBox="0 0 24 24"><path d="M4 8h13a3 3 0 1 0-3-3M2 12h17a3 3 0 1 1-3 3"/></svg><h3>Klima & konfor</h3><p>Tüm odalarda klima, sıcak yaz günlerinde serin bir ev.</p></div>
-      <div class="feat"><svg viewBox="0 0 24 24"><path d="M5 12.5a7 7 0 0 1 14 0M8.5 15.5a3.5 3.5 0 0 1 7 0M12 18.5v.01"/></svg><h3>Ücretsiz WiFi</h3><p>Uzaktan çalışabileceğiniz hızlı internet bağlantısı.</p></div>
-      <div class="feat"><svg viewBox="0 0 24 24"><path d="M12 3v4M8 7h8l-1 5a3 3 0 0 1-6 0zM10 17v3M14 17v3"/></svg><h3>Bahçe & mangal</h3><p>Çimlendirilmiş geniş bahçe, mangal ve açık hava oturma alanı.</p></div>
-      <div class="feat"><svg viewBox="0 0 24 24"><path d="M5 17V9l2-4h10l2 4v8M5 17h14M7 17v2M17 17v2"/><circle cx="8" cy="13" r="1"/><circle cx="16" cy="13" r="1"/></svg><h3>Özel otopark</h3><p>Villa içinde güvenli, ücretsiz araç park alanı.</p></div>
+      <div class="feat"><svg viewBox="0 0 24 24"><path d="M2 18c2-1.5 3.5-1.5 5 0s3.5 1.5 5 0 3.5-1.5 5 0 3.5 1.5 5 0M4 14V6a2 2 0 0 1 2-2h1M4 9h3"/></svg><h3 data-i18n="f1_h">Özel yüzme havuzu</h3><p data-i18n="f1_p">Yalnızca size ait, güneş alan geniş havuz ve güneşlenme terası.</p></div>
+      <div class="feat"><svg viewBox="0 0 24 24"><path d="M3 20l6-8 4 5 3-4 5 7zM3 20h18"/><circle cx="8" cy="6" r="2"/></svg><h3 data-i18n="f2_h">Dağ & doğa manzarası</h3><p data-i18n="f2_p">Her odadan ve bahçeden zeytinlik ve dağ silüeti.</p></div>
+      <div class="feat"><svg viewBox="0 0 24 24"><path d="M4 20V9l8-5 8 5v11M9 20v-5h6v5"/></svg><h3 data-i18n="f3_h">3+1 · 5-6 misafir</h3><p data-i18n="f3_p">Üç yatak odası ve ferah bir salon; aileler ve küçük gruplar için ideal.</p></div>
+      <div class="feat"><svg viewBox="0 0 24 24"><path d="M3 11h18M5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M6 11v8M18 11v8"/></svg><h3 data-i18n="f4_h">Tam donanımlı mutfak</h3><p data-i18n="f4_p">Buzdolabı, bulaşık makinesi, çamaşır makinesi, ankastre fırın, ocak ve tüm ekipmanlar hazır.</p></div>
+      <div class="feat"><svg viewBox="0 0 24 24"><path d="M4 8h13a3 3 0 1 0-3-3M2 12h17a3 3 0 1 1-3 3"/></svg><h3 data-i18n="f5_h">Klima & konfor</h3><p data-i18n="f5_p">Tüm odalarda klima, sıcak yaz günlerinde serin bir ev.</p></div>
+      <div class="feat"><svg viewBox="0 0 24 24"><path d="M5 12.5a7 7 0 0 1 14 0M8.5 15.5a3.5 3.5 0 0 1 7 0M12 18.5v.01"/></svg><h3 data-i18n="f6_h">Ücretsiz WiFi</h3><p data-i18n="f6_p">Uzaktan çalışabileceğiniz hızlı internet bağlantısı.</p></div>
+      <div class="feat"><svg viewBox="0 0 24 24"><path d="M12 3v4M8 7h8l-1 5a3 3 0 0 1-6 0zM10 17v3M14 17v3"/></svg><h3 data-i18n="f7_h">Bahçe & mangal</h3><p data-i18n="f7_p">Çimlendirilmiş geniş bahçe, mangal ve açık hava oturma alanı.</p></div>
+      <div class="feat"><svg viewBox="0 0 24 24"><path d="M5 17V9l2-4h10l2 4v8M5 17h14M7 17v2M17 17v2"/><circle cx="8" cy="13" r="1"/><circle cx="16" cy="13" r="1"/></svg><h3 data-i18n="f8_h">Özel otopark</h3><p data-i18n="f8_p">Villa içinde güvenli, ücretsiz araç park alanı.</p></div>
     </div>
   </div>
 </section>
@@ -394,10 +402,10 @@ footer{background:var(--olive-deep);color:rgba(238,240,230,.7);padding:3rem 0 2.
   <div class="wrap">
     <div class="gallery-head reveal">
       <div>
-        <p class="eyebrow">Galeri</p>
-        <h2>Villa Klemantin'e bir bakış</h2>
+        <p class="eyebrow" data-i18n="gal_eyebrow">Galeri</p>
+        <h2 data-i18n="gal_h2">Villa Klemantin'e bir bakış</h2>
       </div>
-      <p>Fotoğrafa dokunarak büyütün</p>
+      <p data-i18n="gal_hint">Fotoğrafa dokunarak büyütün</p>
     </div>
     <div class="grid reveal" id="grid">
       <figure><img src="images/gallery-03.jpg" alt="Villa Klemantin"></figure>
@@ -427,49 +435,49 @@ footer{background:var(--olive-deep);color:rgba(238,240,230,.7);padding:3rem 0 2.
 <section class="avail pad" id="rezervasyon">
   <div class="wrap reveal">
     <div class="avail-head">
-      <p class="eyebrow" style="justify-content:center">Rezervasyon</p>
-      <h2>Villa <em>takvimi</em></h2>
-      <p class="avail-sub">Takvimden giriş ve çıkış tarihinizi seçin, formu doldurup bize gönderin.</p>
+      <p class="eyebrow" style="justify-content:center" data-i18n="avail_eyebrow">Rezervasyon</p>
+      <h2 data-i18n="avail_h2">Villa <em>takvimi</em></h2>
+      <p class="avail-sub" data-i18n="avail_sub">Takvimden giriş ve çıkış tarihinizi seçin, formu doldurup bize gönderin.</p>
     </div>
     <div class="avail-grid">
       <div class="cal-card">
         <div class="cal-top">
-          <button class="cal-nav" id="calPrev" aria-label="Önceki ay">&#8249;</button>
+          <button class="cal-nav" id="calPrev" data-i18n-aria="aria_prevmonth" aria-label="Önceki ay">&#8249;</button>
           <div class="cal-title" id="calTitle"></div>
-          <button class="cal-nav" id="calNext" aria-label="Sonraki ay">&#8250;</button>
+          <button class="cal-nav" id="calNext" data-i18n-aria="aria_nextmonth" aria-label="Sonraki ay">&#8250;</button>
         </div>
-        <div class="cal-week"><span>Pzt</span><span>Sal</span><span>Çar</span><span>Per</span><span>Cum</span><span>Cmt</span><span>Paz</span></div>
+        <div class="cal-week" id="calWeek"><span>Pzt</span><span>Sal</span><span>Çar</span><span>Per</span><span>Cum</span><span>Cmt</span><span>Paz</span></div>
         <div class="cal-grid" id="calGrid"></div>
-        <div class="cal-legend">
+        <div class="cal-legend" id="calLegend">
           <span><i class="lg-free"></i>Müsait</span>
           <span><i class="lg-booked"></i>Dolu</span>
           <span><i class="lg-today"></i>Bugün</span>
         </div>
       </div>
       <form class="bk-card" id="bkForm" novalidate>
-        <h3>Rezervasyon talebi</h3>
+        <h3 data-i18n="bk_h3">Rezervasyon talebi</h3>
         <div>
-          <label for="bkDates">Tarihler</label>
-          <input type="text" id="bkDates" readonly placeholder="Takvimden seçin">
+          <label for="bkDates" data-i18n="bk_dates_l">Tarihler</label>
+          <input type="text" id="bkDates" readonly placeholder="Takvimden seçin" data-i18n-ph="bk_dates_ph">
         </div>
         <div>
-          <label for="bkName">Ad Soyad</label>
-          <input type="text" id="bkName" autocomplete="name" placeholder="Adınız Soyadınız">
+          <label for="bkName" data-i18n="bk_name_l">Ad Soyad</label>
+          <input type="text" id="bkName" autocomplete="name" placeholder="Adınız Soyadınız" data-i18n-ph="bk_name_ph">
         </div>
         <div>
-          <label for="bkPhone">Telefon</label>
+          <label for="bkPhone" data-i18n="bk_phone_l">Telefon</label>
           <input type="tel" id="bkPhone" autocomplete="tel" placeholder="05xx xxx xx xx">
         </div>
         <div>
-          <label for="bkEmail">E-posta <span class="opt">(isteğe bağlı)</span></label>
-          <input type="email" id="bkEmail" autocomplete="email" placeholder="ornek@eposta.com">
+          <label for="bkEmail" data-i18n="bk_email_l">E-posta <span class="opt">(isteğe bağlı)</span></label>
+          <input type="email" id="bkEmail" autocomplete="email" placeholder="ornek@eposta.com" data-i18n-ph="bk_email_ph">
         </div>
         <p class="bk-msg" id="bkMsg" role="status"></p>
         <div class="bk-actions">
-          <button type="submit" class="cbtn primary">WhatsApp ile gönder</button>
-          <button type="button" class="cbtn ghost" id="bkMail">Gmail ile gönder</button>
+          <button type="submit" class="cbtn primary" data-i18n="bk_send_wa">WhatsApp ile gönder</button>
+          <button type="button" class="cbtn ghost" id="bkMail" data-i18n="bk_send_gmail">Gmail ile gönder</button>
         </div>
-        <p class="bk-note">Talebiniz WhatsApp mesajı ya da Gmail penceresi olarak hazır açılır; göndermeden önce kontrol edebilirsiniz. Rezervasyon, tarafımızca onaylandığında kesinleşir.</p>
+        <p class="bk-note" data-i18n="bk_note">Talebiniz WhatsApp mesajı ya da Gmail penceresi olarak hazır açılır; göndermeden önce kontrol edebilirsiniz. Rezervasyon, tarafımızca onaylandığında kesinleşir.</p>
       </form>
     </div>
   </div>
@@ -478,23 +486,23 @@ footer{background:var(--olive-deep);color:rgba(238,240,230,.7);padding:3rem 0 2.
 <section class="location pad" id="konum">
   <div class="wrap loc-grid">
     <div class="reveal">
-      <p class="eyebrow">Konum</p>
-      <h2>Her şeye yakın, <em>her şeyden uzak.</em></h2>
-      <p class="lead">Köyceğiz'in sakin doğasında, ama bölgenin tüm güzelliklerine kısa mesafede. Plajlar, koylar, göl, şelale ve antik kentler birer gezi uzağınızda.</p>
+      <p class="eyebrow" data-i18n="loc_eyebrow">Konum</p>
+      <h2 data-i18n="loc_h2">Her şeye yakın, <em>her şeyden uzak.</em></h2>
+      <p class="lead" data-i18n="loc_lead">Köyceğiz'in sakin doğasında, ama bölgenin tüm güzelliklerine kısa mesafede. Plajlar, koylar, göl, şelale ve antik kentler birer gezi uzağınızda.</p>
       <ul class="dist">
-        <li><span class="place">Toparlar Şelalesi<small>Serin dere & doğa yürüyüşü</small></span><span class="time">10 dk</span></li>
-        <li><span class="place">Köyceğiz merkez & göl<small>Market, restoran, tekne & kano turları</small></span><span class="time">7 dk</span></li>
-        <li><span class="place">Köyceğiz Otogar<small>Şehirlerarası otobüs varışı</small></span><span class="time">7 dk</span></li>
-        <li><span class="place">Yuvarlakçay<small>Buz gibi kaynak suyu, kahvaltı & alabalık</small></span><span class="time">25 dk</span></li>
-        <li><span class="place">Sultaniye Kaplıcaları<small>Şifalı termal & çamur banyosu</small></span><span class="time">35 dk</span></li>
-        <li><span class="place">Dalyan & Kaunos<small>Kaya mezarları, çamur banyoları</small></span><span class="time">35 dk</span></li>
-        <li><span class="place">Sarıgerme Plajı<small>Mavi bayraklı geniş kumsal, aileler için</small></span><span class="time">40 dk</span></li>
-        <li><span class="place">Akyaka & Gökova<small>Azmak Nehri, sörf, sahil kafeleri</small></span><span class="time">40 dk</span></li>
-        <li><span class="place">Dalaman Çayı Rafting<small>Akköprü parkuru, Nisan–Ekim</small></span><span class="time">45 dk</span></li>
-        <li><span class="place">Ekincik Koyu<small>Sakin koy, tekne turları & dalış</small></span><span class="time">45 dk</span></li>
-        <li><span class="place">İztuzu Plajı<small>Caretta caretta sahili</small></span><span class="time">50 dk</span></li>
-        <li><span class="place">Sarsala Koyu (Göcek)<small>Çam ormanlı koy, tekne turlarıyla</small></span><span class="time">1 sa</span></li>
-        <li><span class="place">Dalaman Havalimanı<small>DLM · ~35 km</small></span><span class="time">40 dk</span></li>
+        <li><span class="place" data-i18n="d1_p">Toparlar Şelalesi<small>Serin dere & doğa yürüyüşü</small></span><span class="time" data-i18n="d1_t">10 dk</span></li>
+        <li><span class="place" data-i18n="d2_p">Köyceğiz merkez & göl<small>Market, restoran, tekne & kano turları</small></span><span class="time" data-i18n="d2_t">7 dk</span></li>
+        <li><span class="place" data-i18n="d3_p">Köyceğiz Otogar<small>Şehirlerarası otobüs varışı</small></span><span class="time" data-i18n="d3_t">7 dk</span></li>
+        <li><span class="place" data-i18n="d4_p">Yuvarlakçay<small>Buz gibi kaynak suyu, kahvaltı & alabalık</small></span><span class="time" data-i18n="d4_t">25 dk</span></li>
+        <li><span class="place" data-i18n="d5_p">Sultaniye Kaplıcaları<small>Şifalı termal & çamur banyosu</small></span><span class="time" data-i18n="d5_t">35 dk</span></li>
+        <li><span class="place" data-i18n="d6_p">Dalyan & Kaunos<small>Kaya mezarları, çamur banyoları</small></span><span class="time" data-i18n="d6_t">35 dk</span></li>
+        <li><span class="place" data-i18n="d7_p">Sarıgerme Plajı<small>Mavi bayraklı geniş kumsal, aileler için</small></span><span class="time" data-i18n="d7_t">40 dk</span></li>
+        <li><span class="place" data-i18n="d8_p">Akyaka & Gökova<small>Azmak Nehri, sörf, sahil kafeleri</small></span><span class="time" data-i18n="d8_t">40 dk</span></li>
+        <li><span class="place" data-i18n="d9_p">Dalaman Çayı Rafting<small>Akköprü parkuru, Nisan–Ekim</small></span><span class="time" data-i18n="d9_t">45 dk</span></li>
+        <li><span class="place" data-i18n="d10_p">Ekincik Koyu<small>Sakin koy, tekne turları & dalış</small></span><span class="time" data-i18n="d10_t">45 dk</span></li>
+        <li><span class="place" data-i18n="d11_p">İztuzu Plajı<small>Caretta caretta sahili</small></span><span class="time" data-i18n="d11_t">50 dk</span></li>
+        <li><span class="place" data-i18n="d12_p">Sarsala Koyu (Göcek)<small>Çam ormanlı koy, tekne turlarıyla</small></span><span class="time" data-i18n="d12_t">1 sa</span></li>
+        <li><span class="place" data-i18n="d13_p">Dalaman Havalimanı<small>DLM · ~35 km</small></span><span class="time" data-i18n="d13_t">40 dk</span></li>
       </ul>
     </div>
     <div class="map-card reveal">
@@ -502,7 +510,7 @@ footer{background:var(--olive-deep);color:rgba(238,240,230,.7);padding:3rem 0 2.
       <p class="ad">Toparlar Mah. Karatepeliler 06 Sokak No:8<br>Köyceğiz, Muğla</p>
       <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=36.9838,28.6754" target="_blank" rel="noopener">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-        Google Haritalar'da aç
+        <span data-i18n="map_link">Google Haritalar'da aç</span>
       </a>
     </div>
   </div>
@@ -510,12 +518,12 @@ footer{background:var(--olive-deep);color:rgba(238,240,230,.7);padding:3rem 0 2.
 
 <section class="contact pad" id="iletisim">
   <div class="wrap reveal">
-    <h2>Tatilinizi <em>Klemantin'de</em> geçirin</h2>
-    <p>Müsait tarihler, fiyat ve rezervasyon için bize ulaşın. Sorularınızı memnuniyetle yanıtlarız.</p>
+    <h2 data-i18n="ct_h2">Tatilinizi <em>Klemantin'de</em> geçirin</h2>
+    <p data-i18n="ct_p">Müsait tarihler, fiyat ve rezervasyon için bize ulaşın. Sorularınızı memnuniyetle yanıtlarız.</p>
     <div class="contact-row">
       <a class="cbtn primary" href="https://wa.me/905457601789" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.7 15l-1.3 5 5.1-1.3A10 10 0 1 0 12 2zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-1.9 1-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.1.3.7 1.1 1.4 1.8 1 .8 1.7 1.1 2 1.2.2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.6-.1l1.8.9c.3.1.4.2.5.3.1.2.1.7-.1 1.3z"/></svg>
-        WhatsApp ile yaz
+        <span data-i18n="ct_wa">WhatsApp ile yaz</span>
       </a>
       <a class="cbtn ghost" href="tel:+905457601789">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
@@ -538,20 +546,21 @@ footer{background:var(--olive-deep);color:rgba(238,240,230,.7);padding:3rem 0 2.
       </div>
     </div>
     <div class="foot-note">
-      <span>© <span id="yr"></span> Villa Klemantin · Özel tanıtım sayfası</span>
+      <span data-i18n="foot_note">© <span id="yr"></span> Villa Klemantin · Özel tanıtım sayfası</span>
     </div>
   </div>
 </footer>
 
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Fotoğraf görüntüleyici">
-  <button class="lb-close" id="lbClose" aria-label="Kapat">&times;</button>
-  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Önceki">&#8249;</button>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" data-i18n-aria="aria_lightbox" aria-label="Fotoğraf görüntüleyici">
+  <button class="lb-close" id="lbClose" data-i18n-aria="aria_close" aria-label="Kapat">&times;</button>
+  <button class="lb-nav lb-prev" id="lbPrev" data-i18n-aria="aria_prev" aria-label="Önceki">&#8249;</button>
   <img id="lbImg" src="" alt="">
-  <button class="lb-nav lb-next" id="lbNext" aria-label="Sonraki">&#8250;</button>
+  <button class="lb-nav lb-next" id="lbNext" data-i18n-aria="aria_next" aria-label="Sonraki">&#8250;</button>
   <div class="lb-count" id="lbCount"></div>
 </div>
 
 <script>document.write('<script src="booked.js?t=' + Date.now() + '"><\/script>');</script>
+<script src="i18n.js"></script>
 <script>
 document.getElementById('yr').textContent=new Date().getFullYear();
 
@@ -568,112 +577,7 @@ menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classL
 const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-// ===== REZERVASYON TAKVİMİ =====
-// DOLU (rezerve) tarihler. start ve end günleri DAHİL dolu gösterilir.
-// end = son konaklanan gece; çıkış gününe yeni misafir girebildiği için o gün aralığa YAZILMAZ.
-// Örn. 20 giriş - 27 çıkış bir rezervasyon: {start:'2026-07-20', end:'2026-07-26'}
-// BOOKED (dolu tarihler) booked.js dosyasından yüklenir — aşağıda <script src="booked.js"> ile.
-// Tarihleri güncellemek için sadece booked.js dosyasını düzenleyin.
-(function(){
-  const grid=document.getElementById('calGrid');
-  if(!grid)return;
-  const titleEl=document.getElementById('calTitle');
-  const prevBtn=document.getElementById('calPrev');
-  const nextBtn=document.getElementById('calNext');
-  const MONTHS=['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
-  const pad=n=>String(n).padStart(2,'0');
-  const key=(y,m,d)=>y+'-'+pad(m+1)+'-'+pad(d);
-  const bookedSet=new Set();
-  BOOKED.forEach(r=>{
-    const s=new Date(r.start+'T00:00:00'), e=new Date((r.end||r.start)+'T00:00:00');
-    for(let d=new Date(s); d<=e; d.setDate(d.getDate()+1)){
-      bookedSet.add(key(d.getFullYear(),d.getMonth(),d.getDate()));
-    }
-  });
-  const today=new Date(); today.setHours(0,0,0,0);
-  const curY=today.getFullYear(), curM=today.getMonth();
-  const view=new Date(curY,curM,1);
-  const datesEl=document.getElementById('bkDates');
-  const msgEl=document.getElementById('bkMsg');
-  let selStart=null, selEnd=null;
-  const fmt=d=>d.getDate()+' '+MONTHS[d.getMonth()]+' '+d.getFullYear();
-  const hasBookedBetween=(a,b)=>{
-    for(let d=new Date(a); d<=b; d.setDate(d.getDate()+1)){
-      if(bookedSet.has(key(d.getFullYear(),d.getMonth(),d.getDate())))return true;
-    }
-    return false;
-  };
-  function pick(dt){
-    msgEl.textContent='';
-    if(!selStart||selEnd){selStart=dt;selEnd=null;}
-    else if(dt.getTime()===selStart.getTime()){selStart=null;selEnd=null;}
-    else if(dt<selStart){selStart=dt;}
-    else if(hasBookedBetween(selStart,dt)){
-      msgEl.textContent='Seçtiğiniz aralıkta dolu gün var. Lütfen farklı bir tarih seçin.';
-      selStart=dt;selEnd=null;
-    }
-    else{selEnd=dt;}
-    render();updateDates();
-  }
-  function updateDates(){
-    if(selStart&&selEnd){
-      const nights=Math.round((selEnd-selStart)/86400000);
-      datesEl.value=fmt(selStart)+' → '+fmt(selEnd)+(nights?' ('+nights+' gece)':'');
-    } else if(selStart){
-      datesEl.value=fmt(selStart)+' → çıkış tarihini seçin';
-    } else {
-      datesEl.value='';
-    }
-  }
-  function render(){
-    const y=view.getFullYear(), m=view.getMonth();
-    titleEl.textContent=MONTHS[m]+' '+y;
-    grid.innerHTML='';
-    let off=(new Date(y,m,1).getDay()+6)%7;
-    const days=new Date(y,m+1,0).getDate();
-    for(let i=0;i<off;i++){const c=document.createElement('div');c.className='cal-day empty';grid.appendChild(c);}
-    for(let d=1;d<=days;d++){
-      const cell=document.createElement('div');
-      cell.className='cal-day';cell.textContent=d;
-      const dt=new Date(y,m,d);
-      if(dt<today){cell.classList.add('past');}
-      else if(bookedSet.has(key(y,m,d))){cell.classList.add('booked');cell.title='Dolu';}
-      else{
-        cell.classList.add('free');cell.title='Müsait';
-        cell.addEventListener('click',()=>pick(dt));
-        if(selStart&&selEnd&&dt>selStart&&dt<selEnd)cell.classList.add('inrange');
-        if((selStart&&dt.getTime()===selStart.getTime())||(selEnd&&dt.getTime()===selEnd.getTime()))cell.classList.add('sel');
-      }
-      if(y===curY&&m===curM&&d===today.getDate())cell.classList.add('today');
-      grid.appendChild(cell);
-    }
-    prevBtn.disabled=(y===curY&&m===curM);
-  }
-  const bkForm=document.getElementById('bkForm');
-  const MAIL='villaklemantin0@gmail.com';
-  const setMsg=(t,ok)=>{msgEl.textContent=t;msgEl.classList.toggle('ok',!!ok);};
-  const send=mail=>{
-    const name=document.getElementById('bkName').value.trim();
-    const phone=document.getElementById('bkPhone').value.trim();
-    const email=document.getElementById('bkEmail').value.trim();
-    if(!selStart||!selEnd){setMsg('Lütfen takvimden giriş ve çıkış tarihini seçin.');return;}
-    if(!name){setMsg('Lütfen adınızı yazın.');return;}
-    if(!phone){setMsg('Lütfen telefon numaranızı yazın.');return;}
-    setMsg('');
-    const lines='Ad Soyad: '+name+'\nTelefon: '+phone+(email?'\nE-posta: '+email:'')+'\nTarihler: '+datesEl.value;
-    if(mail){
-      const w=window.open('https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent(MAIL)+'&su='+encodeURIComponent('Villa Klemantin — Rezervasyon talebi')+'&body='+encodeURIComponent(lines),'_blank','noopener');
-      if(!w)setMsg('Pencere engellendi. '+MAIL+' adresine doğrudan yazabilirsiniz.');
-    } else {
-      window.open('https://wa.me/905457601789?text='+encodeURIComponent('Merhaba, Villa Klemantin için rezervasyon talebim:\n\n'+lines),'_blank','noopener');
-    }
-  };
-  bkForm.addEventListener('submit',e=>{e.preventDefault();send(false);});
-  document.getElementById('bkMail').addEventListener('click',()=>send(true));
-  prevBtn.addEventListener('click',()=>{if(prevBtn.disabled)return;view.setMonth(view.getMonth()-1);render();});
-  nextBtn.addEventListener('click',()=>{view.setMonth(view.getMonth()+1);render();});
-  render();
-})();
+// Takvim + rezervasyon formu ayrı dosyadadır: calendar.js (booked.js ve i18n.js'ten sonra yüklenir).
 
 // pool & garden slider
 (function(){
@@ -714,5 +618,6 @@ document.getElementById('lbNext').addEventListener('click',()=>show(idx+1));
 lb.addEventListener('click',e=>{if(e.target===lb)closeLB();});
 addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')closeLB();if(e.key==='ArrowRight')show(idx+1);if(e.key==='ArrowLeft')show(idx-1);});
 </script>
+<script src="calendar.js"></script>
 </body>
 </html>
